@@ -35,6 +35,7 @@ public class BoardController {
         System.out.println("boardWriter = " + boardWriter);
         System.out.println("boardPass = " + boardPass);
         System.out.println("boardContents = " + boardContents);
+        boardService.save(boardTitle, boardWriter, boardPass, boardContents);
         return "index";
     }
 
