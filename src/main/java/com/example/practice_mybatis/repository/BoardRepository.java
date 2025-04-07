@@ -1,7 +1,7 @@
 package com.example.practice_mybatis.repository;
 
 import com.example.practice_mybatis.domain.BoardEntity;
-import com.example.practice_mybatis.dto.response.CreateBoardResponseDto;
+import com.example.practice_mybatis.dto.response.GetBoardResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -18,7 +18,7 @@ public class BoardRepository {
         sql.insert("Board.save", boardEntity);
     }
 
-    public List<CreateBoardResponseDto> findAll() {
+    public List<GetBoardResponseDto> findAll() {
         return sql.selectList("Board.findAll");
     }
 
@@ -26,7 +26,7 @@ public class BoardRepository {
         sql.update("Board.updateHits", id);
     }
 
-    public CreateBoardResponseDto findById(Long id) {
+    public GetBoardResponseDto findById(Long id) {
         return sql.selectOne("Board.findById", id);
     }
 }

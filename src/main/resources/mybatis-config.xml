@@ -7,8 +7,8 @@
         <typeAlias type="com.example.practice_mybatis.domain.BoardEntity" alias="boardEntity"/>
         <typeAlias type="com.example.practice_mybatis.dto.request.CreateBoardRequestDto"
                    alias="createRequestBoard"></typeAlias>
-        <typeAlias type="com.example.practice_mybatis.dto.response.CreateBoardResponseDto"
-                   alias="createResponseBoard"></typeAlias>
+        <typeAlias type="com.example.practice_mybatis.dto.response.GetBoardResponseDto"
+                   alias="getResponseBoard"></typeAlias>
 <!--        <typeAlias type="com.example.practice_mybatis.dto.BoardFileDTO" alias="boardFile"></typeAlias>-->
     </typeAliases>
 </configuration>

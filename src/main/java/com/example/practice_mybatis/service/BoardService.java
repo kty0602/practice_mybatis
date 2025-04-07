@@ -2,7 +2,7 @@ package com.example.practice_mybatis.service;
 
 import com.example.practice_mybatis.domain.BoardEntity;
 import com.example.practice_mybatis.dto.request.CreateBoardRequestDto;
-import com.example.practice_mybatis.dto.response.CreateBoardResponseDto;
+import com.example.practice_mybatis.dto.response.GetBoardResponseDto;
 import com.example.practice_mybatis.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class BoardService {
         boardRepository.save(boardEntity);
     }
 
-    public List<CreateBoardResponseDto> findAll() {
+    public List<GetBoardResponseDto> findAll() {
         return boardRepository.findAll();
     }
 
@@ -28,7 +28,7 @@ public class BoardService {
         boardRepository.updateHits(id);
     }
 
-    public CreateBoardResponseDto findById(Long id) {
+    public GetBoardResponseDto findById(Long id) {
         return boardRepository.findById(id);
     }
 }

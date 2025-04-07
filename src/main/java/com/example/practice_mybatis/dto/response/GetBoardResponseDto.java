@@ -1,9 +1,10 @@
 package com.example.practice_mybatis.dto.response;
 
+import com.example.practice_mybatis.domain.BoardEntity;
 import lombok.Getter;
 
 @Getter
-public class CreateBoardResponseDto {
+public class GetBoardResponseDto {
 
     private Long id;
     private String boardTitle;

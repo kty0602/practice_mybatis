@@ -7,14 +7,14 @@
         insert into board_table(boardTitle, boardWriter, boardPass, boardContents)
         values(#{boardTitle}, #{boardWriter}, #{boardPass}, #{boardContents})
     </insert>
-    <select id="findAll" resultType="createResponseBoard">
+    <select id="findAll" resultType="getResponseBoard">
         select id, boardTitle, boardWriter, boardHits, date_format(createdAt, "%Y-%m-%d") as createdAt
         from board_table order by id desc
     </select>
     <update id="updateHits" parameterType="Long">
         update board_table set boardHits=boardHits+1 where id=#{id}
     </update>
-    <select id="findById" parameterType="Long" resultType="createResponseBoard">
+    <select id="findById" parameterType="Long" resultType="getResponseBoard">
         select id, boardTitle, boardWriter, boardPass, boardContents, boardHits,
                date_format(createdAt, "%Y-%m-%d %H:%i:%s") as createdAt
         from board_table where id=#{id}

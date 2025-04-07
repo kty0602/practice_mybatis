@@ -1,7 +1,7 @@
 package com.example.practice_mybatis.controller;
 
 import com.example.practice_mybatis.dto.request.CreateBoardRequestDto;
-import com.example.practice_mybatis.dto.response.CreateBoardResponseDto;
+import com.example.practice_mybatis.dto.response.GetBoardResponseDto;
 import com.example.practice_mybatis.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -33,7 +33,7 @@ public class BoardController {
 
     @GetMapping("/list")
     public String findAll(Model model) {
-        List<CreateBoardResponseDto> boardDTOList = boardService.findAll();
+        List<GetBoardResponseDto> boardDTOList = boardService.findAll();
         model.addAttribute("boardList", boardDTOList);
 //        System.out.print("boardDTOList = " + boardDTOList);
         return "list";
@@ -44,7 +44,7 @@ public class BoardController {
         // 조회수 처리
         boardService.updateHits(id);
         // 상세 내용 가져오기
-        CreateBoardResponseDto responseDto = boardService.findById(id);
+        GetBoardResponseDto responseDto = boardService.findById(id);
         model.addAttribute("board", responseDto);
 
         return "detail";
