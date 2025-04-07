@@ -3,18 +3,18 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Board">
-    <insert id="save" parameterType="board" useGeneratedKeys="true" keyProperty="id">
+    <insert id="save" parameterType="boardEntity" useGeneratedKeys="true" keyProperty="id">
         insert into board_table(boardTitle, boardWriter, boardPass, boardContents)
         values(#{boardTitle}, #{boardWriter}, #{boardPass}, #{boardContents})
     </insert>
-    <select id="findAll" resultType="board">
+    <select id="findAll" resultType="createResponseBoard">
         select id, boardTitle, boardWriter, boardHits, date_format(createdAt, "%Y-%m-%d") as createdAt
         from board_table order by id desc
     </select>
     <update id="updateHits" parameterType="Long">
         update board_table set boardHits=boardHits+1 where id=#{id}
     </update>
-    <select id="findById" parameterType="Long" resultType="board">
+    <select id="findById" parameterType="Long" resultType="createResponseBoard">
         select id, boardTitle, boardWriter, boardPass, boardContents, boardHits,
                date_format(createdAt, "%Y-%m-%d %H:%i:%s") as createdAt
         from board_table where id=#{id}

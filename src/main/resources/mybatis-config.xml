@@ -3,8 +3,12 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-        <!-- board-mapper.xml파일에서 parameterType에 지정하는 이름을 alias값인 board로 지정 -->
-        <typeAlias type="com.example.practice_mybatis.dto.BoardDTO" alias="board"></typeAlias>
+        <!-- board-mapper.xml파일에서 parameterType에 지정하는 이름을 alias값인 ...board로 지정 -->
+        <typeAlias type="com.example.practice_mybatis.domain.BoardEntity" alias="boardEntity"/>
+        <typeAlias type="com.example.practice_mybatis.dto.request.CreateBoardRequestDto"
+                   alias="createRequestBoard"></typeAlias>
+        <typeAlias type="com.example.practice_mybatis.dto.response.CreateBoardResponseDto"
+                   alias="createResponseBoard"></typeAlias>
 <!--        <typeAlias type="com.example.practice_mybatis.dto.BoardFileDTO" alias="boardFile"></typeAlias>-->
     </typeAliases>
 </configuration>

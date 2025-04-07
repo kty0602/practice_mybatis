@@ -1,14 +1,12 @@
 package com.example.practice_mybatis.controller;
 
-import com.example.practice_mybatis.dto.BoardDTO;
+import com.example.practice_mybatis.dto.request.CreateBoardRequestDto;
+import com.example.practice_mybatis.dto.response.CreateBoardResponseDto;
 import com.example.practice_mybatis.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,29 +21,19 @@ public class BoardController {
         return "save";
     }
 
-    // BoardDTO에 @Setter가 있을 때 가능
-//    @PostMapping("/save")
-//    public String save(BoardDTO boardDTO) {
-//        System.out.println("boardDto = " + boardDTO);
-//        return "index";
-//    }
-
     @PostMapping("/save")
     public String save(@RequestParam String boardTitle,
                        @RequestParam String boardWriter,
                        @RequestParam String boardPass,
                        @RequestParam String boardContents) {
-        System.out.println("boardTitle = " + boardTitle);
-        System.out.println("boardWriter = " + boardWriter);
-        System.out.println("boardPass = " + boardPass);
-        System.out.println("boardContents = " + boardContents);
-        boardService.save(boardTitle, boardWriter, boardPass, boardContents);
+        CreateBoardRequestDto requestDto = new CreateBoardRequestDto(boardTitle, boardWriter, boardPass, boardContents);
+        boardService.save(requestDto);
         return "index";
     }
 
     @GetMapping("/list")
     public String findAll(Model model) {
-        List<BoardDTO> boardDTOList = boardService.findAll();
+        List<CreateBoardResponseDto> boardDTOList = boardService.findAll();
         model.addAttribute("boardList", boardDTOList);
 //        System.out.print("boardDTOList = " + boardDTOList);
         return "list";
@@ -56,8 +44,8 @@ public class BoardController {
         // 조회수 처리
         boardService.updateHits(id);
         // 상세 내용 가져오기
-        BoardDTO boardDTO = boardService.findById(id);
-        model.addAttribute("board", boardDTO);
+        CreateBoardResponseDto responseDto = boardService.findById(id);
+        model.addAttribute("board", responseDto);
 
         return "detail";
     }

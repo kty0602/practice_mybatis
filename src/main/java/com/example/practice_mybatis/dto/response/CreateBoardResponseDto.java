@@ -1,18 +1,14 @@
-package com.example.practice_mybatis.dto;
+package com.example.practice_mybatis.dto.response;
 
-import lombok.*;
+import lombok.Getter;
 
 @Getter
-//@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-public class BoardDTO {
+public class CreateBoardResponseDto {
 
     private Long id;
+    private String boardTitle;
     private String boardWriter;
     private String boardPass;
-    private String boardTitle;
     private String boardContents;
     private int boardHits;
     private String createdAt;
