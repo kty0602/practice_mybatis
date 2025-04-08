@@ -38,4 +38,8 @@ public class BoardService {
         boardRepository.update(requestDto, id);
     }
 
+    public void delete(Long id) {
+        boardRepository.delete(id);
+    }
+
 }

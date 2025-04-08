@@ -40,4 +40,8 @@ public class BoardRepository {
         paramMap.put("id", id);
         sql.update("Board.update", paramMap);
     }
+
+    public void delete(Long id) {
+        sql.delete("Board.delete", id);
+    }
 }
