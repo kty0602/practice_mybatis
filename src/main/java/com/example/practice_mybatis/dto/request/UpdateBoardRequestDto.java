@@ -1,6 +1,5 @@
 package com.example.practice_mybatis.dto.request;
 
-import com.example.practice_mybatis.domain.Board;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,14 +9,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class CreateBoardRequestDto {
+public class UpdateBoardRequestDto {
 
     private String boardTitle;
-    private String boardWriter;
-    private String boardPass;
     private String boardContents;
-
-    public Board toEntity() {
-        return new Board(boardTitle, boardWriter, boardPass, boardContents);
-    }
 }

@@ -1,6 +1,7 @@
 package com.example.practice_mybatis.controller;
 
 import com.example.practice_mybatis.dto.request.CreateBoardRequestDto;
+import com.example.practice_mybatis.dto.request.UpdateBoardRequestDto;
 import com.example.practice_mybatis.dto.response.GetBoardResponseDto;
 import com.example.practice_mybatis.service.BoardService;
 import lombok.RequiredArgsConstructor;
@@ -47,6 +48,25 @@ public class BoardController {
         GetBoardResponseDto responseDto = boardService.findById(id);
         model.addAttribute("board", responseDto);
 
+        return "detail";
+    }
+
+    // 수정하는 화면으로 이동
+    @GetMapping("update/{id}")
+    public String update(@PathVariable("id") Long id, Model model) {
+        GetBoardResponseDto responseDto = boardService.findById(id);
+        model.addAttribute("board", responseDto);
+        return "update";
+    }
+
+    // 수정 실행
+    @PostMapping("update/{id}")
+    public String update(@PathVariable("id") Long id, @RequestParam String boardTitle,
+                         @RequestParam String boardContents, Model model) {
+        UpdateBoardRequestDto requestDto = new UpdateBoardRequestDto(boardTitle, boardContents);
+        boardService.update(requestDto, id);
+        GetBoardResponseDto responseDto = boardService.findById(id);
+        model.addAttribute("board", responseDto);
         return "detail";
     }
 

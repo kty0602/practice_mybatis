@@ -1,6 +1,5 @@
 package com.example.practice_mybatis.dto.response;
 
-import com.example.practice_mybatis.domain.BoardEntity;
 import lombok.Getter;
 
 @Getter

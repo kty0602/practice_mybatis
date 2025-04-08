@@ -1,7 +1,9 @@
 package com.example.practice_mybatis.service;
 
-import com.example.practice_mybatis.domain.BoardEntity;
+
+import com.example.practice_mybatis.domain.Board;
 import com.example.practice_mybatis.dto.request.CreateBoardRequestDto;
+import com.example.practice_mybatis.dto.request.UpdateBoardRequestDto;
 import com.example.practice_mybatis.dto.response.GetBoardResponseDto;
 import com.example.practice_mybatis.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +18,7 @@ public class BoardService {
     private final BoardRepository boardRepository;
 
     public void save(CreateBoardRequestDto requestDto) {
-        BoardEntity boardEntity = requestDto.toEntity();
+        Board boardEntity = requestDto.toEntity();
         boardRepository.save(boardEntity);
     }
 
@@ -31,4 +33,9 @@ public class BoardService {
     public GetBoardResponseDto findById(Long id) {
         return boardRepository.findById(id);
     }
+
+    public void update(UpdateBoardRequestDto requestDto, Long id) {
+        boardRepository.update(requestDto, id);
+    }
+
 }

@@ -1,11 +1,10 @@
 package com.example.practice_mybatis.domain;
 
 import lombok.Getter;
-
 import java.time.LocalDateTime;
 
 @Getter
-public class BoardEntity {
+public class Board {
 
     private final Long id;
     private final String boardTitle;
@@ -17,7 +16,7 @@ public class BoardEntity {
     private final int fileAttached;
 
     // DB 저장 시 사용하는 생성자
-    public BoardEntity(String boardTitle, String boardWriter, String boardPass, String boardContents) {
+    public Board(String boardTitle, String boardWriter, String boardPass, String boardContents) {
         this.id = null; // insert 후 자동 생성
         this.boardTitle = boardTitle;
         this.boardWriter = boardWriter;
