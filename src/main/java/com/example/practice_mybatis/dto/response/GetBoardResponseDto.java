@@ -12,4 +12,5 @@ public class GetBoardResponseDto {
     private String boardContents;
     private int boardHits;
     private String createdAt;
+    private int fileAttached;
 }

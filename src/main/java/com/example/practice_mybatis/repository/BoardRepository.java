@@ -1,7 +1,9 @@
 package com.example.practice_mybatis.repository;
 
 import com.example.practice_mybatis.domain.Board;
+import com.example.practice_mybatis.domain.BoardFile;
 import com.example.practice_mybatis.dto.request.UpdateBoardRequestDto;
+import com.example.practice_mybatis.dto.response.GetBoardFileResponseDto;
 import com.example.practice_mybatis.dto.response.GetBoardResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -16,9 +18,10 @@ import java.util.Map;
 public class BoardRepository {
 
     private final SqlSessionTemplate sql;
-    public void save(Board boardEntity) {
+    public Board save(Board boardEntity) {
         // statement : mapper-namespace / id
         sql.insert("Board.save", boardEntity);
+        return boardEntity;
     }
 
     public List<GetBoardResponseDto> findAll() {
@@ -43,5 +46,13 @@ public class BoardRepository {
 
     public void delete(Long id) {
         sql.delete("Board.delete", id);
+    }
+
+    public void saveFile(BoardFile boardFile) {
+        sql.insert("Board.saveFile", boardFile);
+    }
+
+    public GetBoardFileResponseDto findFile(Long id) {
+        return sql.selectOne("Board.findFile", id);
     }
 }

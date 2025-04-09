@@ -2,13 +2,16 @@ package com.example.practice_mybatis.controller;
 
 import com.example.practice_mybatis.dto.request.CreateBoardRequestDto;
 import com.example.practice_mybatis.dto.request.UpdateBoardRequestDto;
+import com.example.practice_mybatis.dto.response.GetBoardFileResponseDto;
 import com.example.practice_mybatis.dto.response.GetBoardResponseDto;
 import com.example.practice_mybatis.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -26,8 +29,10 @@ public class BoardController {
     public String save(@RequestParam String boardTitle,
                        @RequestParam String boardWriter,
                        @RequestParam String boardPass,
-                       @RequestParam String boardContents) {
-        CreateBoardRequestDto requestDto = new CreateBoardRequestDto(boardTitle, boardWriter, boardPass, boardContents);
+                       @RequestParam String boardContents,
+                       @RequestParam(required = false) MultipartFile boardFile) throws IOException {
+        CreateBoardRequestDto requestDto =
+                new CreateBoardRequestDto(boardTitle, boardWriter, boardPass, boardContents, boardFile);
         boardService.save(requestDto);
         return "index";
     }
@@ -47,6 +52,10 @@ public class BoardController {
         // 상세 내용 가져오기
         GetBoardResponseDto responseDto = boardService.findById(id);
         model.addAttribute("board", responseDto);
+        if (responseDto.getFileAttached() == 1) {
+            GetBoardFileResponseDto getBoardFileResponseDto = boardService.findFile(id);
+            model.addAttribute("boardFile", getBoardFileResponseDto);
+        }
 
         return "detail";
     }

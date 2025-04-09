@@ -9,6 +9,8 @@
                    alias="createRequestBoard"></typeAlias>
         <typeAlias type="com.example.practice_mybatis.dto.response.GetBoardResponseDto"
                    alias="getResponseBoard"></typeAlias>
-<!--        <typeAlias type="com.example.practice_mybatis.dto.BoardFileDTO" alias="boardFile"></typeAlias>-->
+        <typeAlias type="com.example.practice_mybatis.domain.BoardFile" alias="boardFile"></typeAlias>
+        <typeAlias type="com.example.practice_mybatis.dto.response.GetBoardFileResponseDto"
+                   alias="getResponseBoardFile"></typeAlias>
     </typeAliases>
 </configuration>

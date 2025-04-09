@@ -16,7 +16,7 @@ public class Board {
     private final int fileAttached;
 
     // DB 저장 시 사용하는 생성자
-    public Board(String boardTitle, String boardWriter, String boardPass, String boardContents) {
+    public Board(String boardTitle, String boardWriter, String boardPass, String boardContents, boolean hasfile) {
         this.id = null; // insert 후 자동 생성
         this.boardTitle = boardTitle;
         this.boardWriter = boardWriter;
@@ -24,6 +24,6 @@ public class Board {
         this.boardContents = boardContents;
         this.boardHits = 0;
         this.createdAt = null; // DB에서 자동 입력
-        this.fileAttached = 0;
+        this.fileAttached = hasfile ? 1 : 0;
     }
 }
