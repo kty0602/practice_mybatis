@@ -23,24 +23,26 @@ public class BoardService {
     private final BoardRepository boardRepository;
 
     public void save(CreateBoardRequestDto requestDto) throws IOException {
-        boolean hasFile = requestDto.getBoardFile() != null && !requestDto.getBoardFile().isEmpty();
+        List<MultipartFile> files = requestDto.getBoardFile();
+        boolean hasFile = files != null && !files.isEmpty();
 
         Board boardEntity = requestDto.toEntity(hasFile);
         Board board = boardRepository.save(boardEntity);
 
         if (hasFile) {
-            MultipartFile file = requestDto.getBoardFile();
+            for (MultipartFile file : files) {
+                if (file.isEmpty()) continue;
 
-            String originalFileName = file.getOriginalFilename();
-            String storedFileName = System.currentTimeMillis() + "-" + originalFileName;
+                String originalFileName = file.getOriginalFilename();
+                String storedFileName = System.currentTimeMillis() + "-" + originalFileName;
 
-            // 실제 파일 저장
-            String savePath = "C:/Users/User/testMyBatis/" + storedFileName;
-            file.transferTo(new File(savePath));
+                String savePath = "C:/Users/User/testMyBatis/" + storedFileName;
+                file.transferTo(new File(savePath));
 
-            // BoardFile 객체 생성 및 저장
-            BoardFile boardFile = new BoardFile(board.getId(), originalFileName, storedFileName);
-            boardRepository.saveFile(boardFile);
+                // BoardFile 객체 생성 및 저장
+                BoardFile boardFile = new BoardFile(board.getId(), originalFileName, storedFileName);
+                boardRepository.saveFile(boardFile);
+            }
         }
     }
 
@@ -64,7 +66,7 @@ public class BoardService {
         boardRepository.delete(id);
     }
 
-    public GetBoardFileResponseDto findFile(Long id) {
+    public List<GetBoardFileResponseDto> findFile(Long id) {
         return boardRepository.findFile(id);
     }
 

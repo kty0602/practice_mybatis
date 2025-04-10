@@ -52,7 +52,7 @@ public class BoardRepository {
         sql.insert("Board.saveFile", boardFile);
     }
 
-    public GetBoardFileResponseDto findFile(Long id) {
-        return sql.selectOne("Board.findFile", id);
+    public List<GetBoardFileResponseDto> findFile(Long id) {
+        return sql.selectList("Board.findFile", id);
     }
 }

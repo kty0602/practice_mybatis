@@ -30,7 +30,7 @@ public class BoardController {
                        @RequestParam String boardWriter,
                        @RequestParam String boardPass,
                        @RequestParam String boardContents,
-                       @RequestParam(required = false) MultipartFile boardFile) throws IOException {
+                       @RequestParam(required = false) List<MultipartFile> boardFile) throws IOException {
         CreateBoardRequestDto requestDto =
                 new CreateBoardRequestDto(boardTitle, boardWriter, boardPass, boardContents, boardFile);
         boardService.save(requestDto);
@@ -53,8 +53,8 @@ public class BoardController {
         GetBoardResponseDto responseDto = boardService.findById(id);
         model.addAttribute("board", responseDto);
         if (responseDto.getFileAttached() == 1) {
-            GetBoardFileResponseDto getBoardFileResponseDto = boardService.findFile(id);
-            model.addAttribute("boardFile", getBoardFileResponseDto);
+            List<GetBoardFileResponseDto> getBoardFileResponseDtoList = boardService.findFile(id);
+            model.addAttribute("boardFileList", getBoardFileResponseDtoList);
         }
 
         return "detail";

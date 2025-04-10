@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,7 +19,7 @@ public class CreateBoardRequestDto {
     private String boardWriter;
     private String boardPass;
     private String boardContents;
-    private MultipartFile boardFile;
+    private List<MultipartFile> boardFile;
 
     public Board toEntity(boolean hasFile) {
         return new Board(boardTitle, boardWriter, boardPass, boardContents, hasFile);
